@@ -1781,6 +1781,7 @@ do_mmap(const uintptr_t addr0, const size_t len0, const int prot,
 		populated_mapping = 1;
 	}
 
+#if 0
 	/* XXX: Intel MPI 128MB mapping.. */
 	if (len == 134217728) {
 		dkprintf("%s: %ld bytes mapping -> no prefault\n",
@@ -1788,6 +1789,7 @@ do_mmap(const uintptr_t addr0, const size_t len0, const int prot,
 		vrflags |= VR_DEMAND_PAGING;
 		populated_mapping = 0;
 	}
+#endif
 
 	if ((flags & MAP_ANONYMOUS) && !(prot & PROT_WRITE)) {
 		error = set_host_vma(addr, len, PROT_READ | PROT_EXEC, 1/* holding memory_range_lock */);
@@ -2782,7 +2784,9 @@ unsigned long do_fork(int clone_flags, unsigned long newsp,
 	struct syscall_request request1 IHK_DMA_ALIGN;
 	int ptrace_event = 0;
 	int termsig = clone_flags & 0x000000ff;
+#if 0
 	const struct ihk_mc_cpu_info *cpu_info = ihk_mc_get_cpu_info();
+#endif
 	int err = 0;
 	unsigned long clone_pthread_start_routine = 0;
 	struct vm_range *range = NULL;
@@ -2840,10 +2844,12 @@ unsigned long do_fork(int clone_flags, unsigned long newsp,
 		return -EINVAL;
 	}
 
+#if 0
 	if (!allow_oversubscribe && rusage.num_threads >= cpu_info->ncpus) {
 		kprintf("%s: ERROR: CPU oversubscription is not allowed. Specify -O option in mcreboot.sh to allow it.\n", __FUNCTION__);
 		return -EINVAL;
 	}
+#endif
 
 	if (oldproc->coredump_barrier_count) {
 		return -EINVAL;
