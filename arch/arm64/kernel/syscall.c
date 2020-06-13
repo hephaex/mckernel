@@ -58,7 +58,10 @@ extern int num_processors;
 int obtain_clone_cpuid(cpu_set_t *cpu_set, int use_last)
 {
 	int min_queue_len = -1;
-	int cpu, min_cpu = -1, uti_cpu = -1;
+	int cpu, min_cpu = -1;
+#if 0
+	int uti_cpu = -1;
+#endif
 	unsigned long irqstate = 0;
 
 	int start, end, step;
