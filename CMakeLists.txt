@@ -137,8 +137,8 @@ if (NOT LIBIBERTY)
 endif()
 
 # ignore libdwarf installed by libdwarf-devel-*.rpm because dwarf.h is located in /usr/include/libdwarf
-execute_process(COMMAND bash -c "find /usr/include -name dwarf.h"  OUTPUT_VARIABLE DWARF_H_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
-if (DWARF_H_PATH STREQUAL "/usr/include/libdwarf/dwarf.h")
+execute_process(COMMAND bash -c "[[ -f /usr/include/libdwarf/dwarf.h ]] && echo YES" OUTPUT_VARIABLE BAD_DWARF_H OUTPUT_STRIP_TRAILING_WHITESPACE)
+if (BAD_DWARF_H STREQUAL "YES")
 	message("WARNING: ignoring libdwarf installed by libdwarf-devel-*.rpm")
 else()
 	find_library(LIBDWARF dwarf)
