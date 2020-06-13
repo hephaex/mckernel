@@ -2785,7 +2785,9 @@ unsigned long do_fork(int clone_flags, unsigned long newsp,
 	struct syscall_request request1 IHK_DMA_ALIGN;
 	int ptrace_event = 0;
 	int termsig = clone_flags & 0x000000ff;
+#if 0
 	const struct ihk_mc_cpu_info *cpu_info = ihk_mc_get_cpu_info();
+#endif
 	int err = 0;
 	unsigned long clone_pthread_start_routine = 0;
 	struct vm_range *range = NULL;
