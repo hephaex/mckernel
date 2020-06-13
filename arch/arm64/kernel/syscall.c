@@ -2178,7 +2178,9 @@ int do_process_vm_read_writev(int pid,
 	unsigned long lpage_left, rpage_left;
 	unsigned long lpsize, rpsize;
 	void *rva, *lva;
+#if 0
 	struct vm_range *range;
+#endif
 	struct mcs_rwlock_node_irqsave lock;
 	struct mcs_rwlock_node update_lock;
 
